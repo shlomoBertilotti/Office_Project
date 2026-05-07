@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-title">
+    <h2>Employee Details</h2>
+    <div class="button-row">
+        <a class="secondary-button" href="/employees">Back</a>
+        <a class="primary-button" href="/employees/{{ employee.id }}/edit">Edit</a>
+    </div>
+</div>
+
+<section class="details-card">
+    <div class="detail-row">
+        <span>ID</span>
+        <strong>{{ employee.id }}</strong>
+    </div>
+
+    <div class="detail-row">
+        <span>Name</span>
+        <strong>{{ employee.name }}</strong>
+    </div>
+
+    <div class="detail-row">
+        <span>Department</span>
+        <strong>{{ employee.department }}</strong>
+    </div>
+
+    <div class="detail-row">
+        <span>Hire Date</span>
+        <strong>{{ employee.hire_date }}</strong>
+    </div>
+
+    <div class="detail-row">
+        <span>Seniority</span>
+        <strong>{{ employee.seniority }} years</strong>
+    </div>
+
+    <div class="detail-row">
+        <span>Salary</span>
+        <strong>{{ employee.salary }}</strong>
+    </div>
+
+    <div class="detail-row">
+        <span>Office ID</span>
+        <strong>{{ employee.office_id or "None" }}</strong>
+    </div>
+
+    <div class="detail-row">
+        <span>Office Floor</span>
+        <strong>{{ employee.office_floor or "-" }}</strong>
+    </div>
+
+    <div class="detail-row">
+        <span>Office Room</span>
+        <strong>{{ employee.office_room or "-" }}</strong>
+    </div>
+</section>
+
+{% endblock %}

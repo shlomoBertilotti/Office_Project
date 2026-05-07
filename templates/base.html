@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Office Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="top-header">
+    <div>
+        <h1>Office Dashboard</h1>
+        <p>Manage employees, offices, assignments, and capacity.</p>
+    </div>
+
+    <nav class="navbar">
+        <a href="/">Home</a>
+        <a href="/employees">Employees</a>
+        <a href="/offices">Offices</a>
+        <a href="/employees/add">Add Employee</a>
+        <a href="/offices/add">Add Office</a>
+    </nav>
+</header>
+
+<main class="container">
+    {% block content %}{% endblock %}
+</main>
+
+</body>
+</html>

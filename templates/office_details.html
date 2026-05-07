@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-title">
+    <h2>Office Details</h2>
+    <div class="button-row">
+        <a class="secondary-button" href="/offices">Back</a>
+        <a class="primary-button" href="/offices/{{ office.id }}/edit">Edit</a>
+        <a class="primary-button" href="/offices/{{ office.id }}/assign">Assign Employees</a>
+    </div>
+</div>
+
+<section class="details-card">
+    <div class="detail-row">
+        <span>ID</span>
+        <strong>{{ office.id }}</strong>
+    </div>
+
+    <div class="detail-row">
+        <span>Floor</span>
+        <strong>{{ office.floor }}</strong>
+    </div>
+
+    <div class="detail-row">
+        <span>Room Number</span>
+        <strong>{{ office.room_number }}</strong>
+    </div>
+
+    <div class="detail-row">
+        <span>Capacity</span>
+        <strong>{{ office.capacity }}</strong>
+    </div>
+
+    <div class="detail-row">
+        <span>Employees Assigned</span>
+        <strong>{{ office.employees_count }}</strong>
+    </div>
+
+    <div class="detail-row">
+        <span>Status</span>
+        <strong>
+            {% if office.employees_count == 0 %}
+                Empty
+            {% elif office.employees_count < office.capacity %}
+                Available Space
+            {% elif office.employees_count == office.capacity %}
+                Full
+            {% else %}
+                Overloaded
+            {% endif %}
+        </strong>
+    </div>
+</section>
+
+<h3 class="section-heading">Employees in this Office</h3>
+
+<div class="table-card">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Hire Date</th>
+            <th>Seniority</th>
+            <th>Salary</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for employee in employees %}
+        <tr>
+            <td>{{ employee.id }}</td>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.department }}</td>
+            <td>{{ employee.hire_date }}</td>
+            <td>{{ employee.seniority }} years</td>
+            <td>{{ employee.salary }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

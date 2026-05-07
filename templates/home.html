@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero">
+    <h2>Employee & Office Management</h2>
+    <p>
+        A clean dashboard for managing employees, offices, office capacity,
+        and employee assignments.
+    </p>
+</section>
+
+<section class="cards-grid">
+    <a class="dashboard-card" href="/employees">
+        <h3>Employees</h3>
+        <p>View, filter, sort, edit, and delete employees.</p>
+    </a>
+
+    <a class="dashboard-card" href="/offices">
+        <h3>Offices</h3>
+        <p>View office capacity, employee count, and availability.</p>
+    </a>
+
+    <a class="dashboard-card" href="/employees/add">
+        <h3>Add Employee</h3>
+        <p>Create a new employee and assign an office.</p>
+    </a>
+
+    <a class="dashboard-card" href="/offices/add">
+        <h3>Add Office</h3>
+        <p>Create a new office with floor, room, and capacity.</p>
+    </a>
+</section>
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-title">
+    <h2>Offices</h2>
+    <a class="primary-button" href="/offices/add">Add Office</a>
+</div>
+
+<form method="get" class="filter-panel">
+    <div>
+        <label>Sort By</label>
+        <select name="sort_by">
+            <option value="id" {% if sort_by == "id" %}selected{% endif %}>ID</option>
+            <option value="floor" {% if sort_by == "floor" %}selected{% endif %}>Floor</option>
+            <option value="room_number" {% if sort_by == "room_number" %}selected{% endif %}>Room Number</option>
+            <option value="capacity" {% if sort_by == "capacity" %}selected{% endif %}>Capacity</option>
+            <option value="employees_count" {% if sort_by == "employees_count" %}selected{% endif %}>Employee Count</option>
+        </select>
+    </div>
+
+    <div>
+        <label>Filter</label>
+        <select name="filter_by">
+            <option value="all" {% if filter_by == "all" %}selected{% endif %}>All Offices</option>
+            <option value="empty" {% if filter_by == "empty" %}selected{% endif %}>Empty Offices</option>
+            <option value="available" {% if filter_by == "available" %}selected{% endif %}>Available Space</option>
+            <option value="overloaded" {% if filter_by == "overloaded" %}selected{% endif %}>Overloaded Offices</option>
+        </select>
+    </div>
+
+    <button type="submit">Apply</button>
+</form>
+
+<div class="table-card">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Floor</th>
+            <th>Room</th>
+            <th>Capacity</th>
+            <th>Employees</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for office in offices %}
+        <tr class="{% if office.employees_count > office.capacity %}danger-row{% endif %}">
+            <td>{{ office.id }}</td>
+            <td>{{ office.floor }}</td>
+            <td>{{ office.room_number }}</td>
+            <td>{{ office.capacity }}</td>
+            <td>{{ office.employees_count }}</td>
+            <td>
+                {% if office.employees_count == 0 %}
+                    <span class="badge neutral">Empty</span>
+                {% elif office.employees_count < office.capacity %}
+                    <span class="badge success">Available</span>
+                {% elif office.employees_count == office.capacity %}
+                    <span class="badge warning">Full</span>
+                {% else %}
+                    <span class="badge danger">Overloaded</span>
+                {% endif %}
+            </td>
+            <td class="actions">
+                <a href="/offices/{{ office.id }}">Details</a>
+                <a href="/offices/{{ office.id }}/edit">Edit</a>
+                <a href="/offices/{{ office.id }}/assign">Assign</a>
+                <form method="post" action="/offices/{{ office.id }}/delete">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

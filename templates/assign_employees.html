@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-title">
+    <h2>Assign Employees to Office</h2>
+    <a class="secondary-button" href="/offices/{{ office.id }}">Back to Office</a>
+</div>
+
+<section class="details-card">
+    <div class="detail-row">
+        <span>Office</span>
+        <strong>Floor {{ office.floor }}, Room {{ office.room_number }}</strong>
+    </div>
+
+    <div class="detail-row">
+        <span>Capacity</span>
+        <strong>{{ office.capacity }}</strong>
+    </div>
+
+    <div class="detail-row">
+        <span>Current Employees</span>
+        <strong>{{ office.employees_count }}</strong>
+    </div>
+</section>
+
+<form method="post" class="form-card">
+    <h3>Select Employees</h3>
+
+    <div class="checkbox-list">
+        {% for employee in employees %}
+        <label class="checkbox-item">
+            <input type="checkbox" name="employee_ids" value="{{ employee.id }}"
+                {% if employee.office_id == office.id %}checked{% endif %}>
+            <span>
+                {{ employee.name }} —
+                {{ employee.department }}
+                {% if employee.office_id %}
+                    | Current Office: {{ employee.office_id }}
+                {% else %}
+                    | No Office
+                {% endif %}
+            </span>
+        </label>
+        {% endfor %}
+    </div>
+
+    <button type="submit" class="primary-button">Assign Selected Employees</button>
+</form>
+
+{% endblock %}

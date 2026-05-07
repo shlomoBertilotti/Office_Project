@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-title">
+    <h2>Employees</h2>
+    <a class="primary-button" href="/employees/add">Add Employee</a>
+</div>
+
+<form method="get" class="filter-panel">
+    <div>
+        <label>Sort By</label>
+        <select name="sort_by">
+            <option value="id" {% if sort_by == "id" %}selected{% endif %}>ID</option>
+            <option value="name" {% if sort_by == "name" %}selected{% endif %}>Name</option>
+            <option value="department" {% if sort_by == "department" %}selected{% endif %}>Department</option>
+            <option value="hire_date" {% if sort_by == "hire_date" %}selected{% endif %}>Hire Date</option>
+            <option value="salary" {% if sort_by == "salary" %}selected{% endif %}>Salary</option>
+            <option value="seniority" {% if sort_by == "seniority" %}selected{% endif %}>Seniority</option>
+        </select>
+    </div>
+
+    <div>
+        <label>Minimum Seniority</label>
+        <input type="number" name="min_seniority" value="{{ min_seniority or '' }}" placeholder="Years">
+    </div>
+
+    <button type="submit">Apply</button>
+</form>
+
+<div class="table-card">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Hire Date</th>
+            <th>Seniority</th>
+            <th>Salary</th>
+            <th>Office ID</th>
+            <th>Floor</th>
+            <th>Room</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for employee in employees %}
+        <tr>
+            <td>{{ employee.id }}</td>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.department }}</td>
+            <td>{{ employee.hire_date }}</td>
+            <td>{{ employee.seniority }} years</td>
+            <td>{{ employee.salary }}</td>
+            <td>{{ employee.office_id or "None" }}</td>
+            <td>{{ employee.office_floor or "-" }}</td>
+            <td>{{ employee.office_room or "-" }}</td>
+            <td class="actions">
+                <a href="/employees/{{ employee.id }}">Details</a>
+                <a href="/employees/{{ employee.id }}/edit">Edit</a>
+                <form method="post" action="/employees/{{ employee.id }}/delete">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

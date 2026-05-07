@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-title">
+    <h2>{% if office %}Edit Office{% else %}Add Office{% endif %}</h2>
+    <a class="secondary-button" href="/offices">Back to Offices</a>
+</div>
+
+<form method="post" class="form-card">
+    <label>Floor</label>
+    <input type="number" name="floor" value="{{ office.floor if office else '' }}" required>
+
+    <label>Room Number</label>
+    <input type="text" name="room_number" value="{{ office.room_number if office else '' }}" required>
+
+    <label>Capacity</label>
+    <input type="number" name="capacity" value="{{ office.capacity if office else '' }}" required>
+
+    <button type="submit" class="primary-button">Save</button>
+</form>
+
+{% endblock %}
