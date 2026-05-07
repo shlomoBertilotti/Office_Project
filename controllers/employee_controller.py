@@ -13,11 +13,6 @@ from services.office_service import get_all_offices
 
 employee_bp = Blueprint("employee", __name__)
 
-
-# =========================
-# HTML PAGES
-# =========================
-
 @employee_bp.route("/employees")
 def employees_page():
     sort_by = request.args.get("sort_by", "id")
@@ -103,10 +98,6 @@ def delete_employee_page(employee_id):
     delete_employee(employee_id)
     return redirect("/employees")
 
-
-# =========================
-# REST API
-# =========================
 
 @employee_bp.route("/api/employees", methods=["GET"])
 def api_get_employees():
