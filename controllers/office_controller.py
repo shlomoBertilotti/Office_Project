@@ -16,10 +16,6 @@ from services.employee_service import get_all_employees
 office_bp = Blueprint("office", __name__)
 
 
-# =========================
-# HTML PAGES
-# =========================
-
 @office_bp.route("/offices")
 def offices_page():
     sort_by = request.args.get("sort_by", "id")
@@ -101,9 +97,6 @@ def assign_employees_page(office_id):
     )
 
 
-# =========================
-# REST API
-# =========================
 
 @office_bp.route("/api/offices", methods=["GET"])
 def api_get_offices():
