@@ -14,9 +14,6 @@ from services.office_service import get_all_offices
 employee_bp = Blueprint("employee", __name__)
 
 
-# =========================
-# HTML PAGES
-# =========================
 
 @employee_bp.route("/employees")
 def employees_page():

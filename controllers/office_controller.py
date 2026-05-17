@@ -97,9 +97,6 @@ def assign_employees_page(office_id):
     )
 
 
-# =========================
-# REST API
-# =========================
 
 @office_bp.route("/api/offices", methods=["GET"])
 def api_get_offices():
